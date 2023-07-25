@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="">
+
+<head>
+
+</head>
+<body>
+<table>
+    <tbody>
+
+    <tr th:each="quest,loopstt:${quests}" class="hov-darken cur-pointer redirect-to w3-border-bottom"
+        th:href="@{/admin/question/edit/{id} (id = ${quest.id}) }">
+        <td th:text="${quest.text}"></td>
+        <td>
+            <div class="" th:each="answer : ${quest.answerList}">
+                <div th:class="${(answer.is_correct)?'w3-green w3-col m6 w3-border':'w3-col m6 w3-border'}"
+                     th:text="${answer.text}">
+
+                </div>
+
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
+

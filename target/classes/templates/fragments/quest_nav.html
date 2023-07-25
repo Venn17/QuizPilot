@@ -1,0 +1,38 @@
+<span xmlns:th="http://www.thymeleaf.org">
+<p>Lorem Ipsum is simply dummy text of the printing
+    and typesetting industry. Lorem Ipsum has been the
+    industry's standard dummy text ever since the 1500s
+    , when an unknown printer took a galley of type and
+    scrambled it to make a type specimen book. It has
+    survived not only five centuries, but also the leap
+    into electronic typesetting, remaining essentially
+    unchanged. It was popularised in the 1960s with the
+    release of Letraset sheets containing Lorem Ipsum
+    passages, and more recently with desktop publishing
+    software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+<div class="w3-row">
+    <div class="w3-col">
+        <p>Horizontal:</p>
+        <div class="w3-bar w3-light-grey">
+            <a th:href="@{/admin/question}" class="w3-bar-item w3-button w3-green">List</a>
+            <a th:href="@{/admin/question/add}" class="w3-bar-item w3-button w3-hide-small">Add a New</a>
+            <div class="w3-dropdown-hover w3-right">
+                <button class="w3-button">
+                    Order by <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="w3-dropdown-content w3-bar-block w3-white w3-card-4">
+                    <button class="w3-bar-item w3-button w3-text-black order-by-btn" orderByValue="DESC">Newest</button>
+                    <button class="w3-bar-item w3-button w3-text-black order-by-btn" orderByValue="ASC">Oldest</button>
+                </div>
+            </div>
+            <div class="w3-bar-item w3-button w3-right">
+                <div class="w3-bar">
+                    <input type="text" id="search-value" placeholder="Search here.....">
+                    <button type="button" id="search-btn"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+        <br class="w3-hide-small">
+    </div>
+</div>
+</span>

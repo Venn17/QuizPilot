@@ -1,0 +1,86 @@
+<span xmlns:th="http://www.thymeleaf.org">
+<hr>
+<div class="w3-container">
+  <h5>Dashboard</h5>
+</div>
+<div class="w3-bar-block">
+  <div th:if="${active} == test">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
+       onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
+    <a th:href="@{/admin/test}" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-graduation-cap"
+                                                                                    aria-hidden="true"></i>&nbsp; Quiz Management</a>
+    <a th:href="@{/admin/question}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-question"
+                                                                                aria-hidden="true"></i>&nbsp; Question Management</a>
+    <a th:href="@{/admin/subjects}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book"
+                                                                                aria-hidden="true"></i>&nbsp; Subject Management</a>
+    <a th:href="@{/admin/posts}" class="w3-bar-item w3-button w3-padding "><i class="fa fa-clipboard"
+                                                                              aria-hidden="true"></i>&nbsp; Post Management</a>
+    <a th:href="@{/admin/user}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; User Management</a>
+  </div>
+  <div th:if="${active} == question">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
+       onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
+    <a th:href="@{/admin/test}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-graduation-cap"
+                                                                            aria-hidden="true"></i>&nbsp; Quiz Management</a>
+    <a th:href="@{/admin/question}" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-question"
+                                                                                        aria-hidden="true"></i>&nbsp; Question Management</a>
+    <a th:href="@{/admin/subjects}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book"
+                                                                                aria-hidden="true"></i>&nbsp; Subject Management</a>
+    <a th:href="@{/admin/posts}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-clipboard"
+                                                                             aria-hidden="true"></i>&nbsp; Post Management</a>
+    <a th:href="@{/admin/user}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; User Management</a>
+  </div>
+  <div th:if="${active} == user">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
+       onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
+    <a th:href="@{/admin/test}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-graduation-cap"
+                                                                            aria-hidden="true"></i>&nbsp; Quiz Management</a>
+    <a th:href="@{/admin/question}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-question"
+                                                                                aria-hidden="true"></i>&nbsp; Question Management</a>
+    <a th:href="@{/admin/subjects}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book"
+                                                                                aria-hidden="true"></i>&nbsp; Subject Management</a>
+    <a th:href="@{/admin/posts}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-clipboard"
+                                                                             aria-hidden="true"></i>&nbsp; Post Management</a>
+    <a th:href="@{/admin/user}" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>&nbsp; User Management</a>
+  </div>
+<div th:if="${active} == post">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
+       onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
+  <a th:href="@{/admin/test}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-graduation-cap"
+                                                                          aria-hidden="true"></i>&nbsp; Quiz Management</a>
+    <a th:href="@{/admin/question}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-question"
+                                                                                aria-hidden="true"></i>&nbsp; Question Management</a>
+    <a th:href="@{/admin/subjects}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book"
+                                                                                aria-hidden="true"></i>&nbsp; Subject Management</a>
+    <a th:href="@{/admin/posts}" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-clipboard"
+                                                                                     aria-hidden="true"></i>&nbsp; Post Management</a>
+    <a th:href="@{/admin/user}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; User Management</a>
+  </div>
+  <div th:if="${active} == subject">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
+       onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
+    <a th:href="@{/admin/test}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-graduation-cap"
+                                                                            aria-hidden="true"></i>&nbsp; Quiz Management</a>
+    <a th:href="@{/admin/question}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-question"
+                                                                                aria-hidden="true"></i>&nbsp; Question Management</a>
+    <a th:href="@{/admin/subjects}" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-book"
+                                                                                        aria-hidden="true"></i>&nbsp; Subject Management</a>
+    <a th:href="@{/admin/posts}" class="w3-bar-item w3-button w3-padding "><i class="fa fa-clipboard"
+                                                                              aria-hidden="true"></i>&nbsp; Post Management</a>
+    <a th:href="@{/admin/user}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>&nbsp; User Management</a>
+  </div>
+  <div th:if="${active} == null">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
+       onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
+    <a th:href="@{/admin/test}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-graduation-cap"
+                                                                            aria-hidden="true"></i>&nbsp; Quiz Management</a>
+    <a th:href="@{/admin/question}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-question"
+                                                                                aria-hidden="true"></i>&nbsp; Question Management</a>
+    <a th:href="@{/admin/subjects}" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-book"
+                                                                                        aria-hidden="true"></i> Subject Management</a>
+   <a th:href="@{/admin/posts}" class="w3-bar-item w3-button w3-padding "><i class="fa fa-clipboard"
+                                                                             aria-hidden="true"></i>&nbsp; Post Management</a>
+    <a th:href="@{/admin/user}" class="w3-bar-item w3-button w3-padding "><i class="fa fa-users fa-fw"></i>&nbsp; User Management</a>
+  </div>
+</div>
+  </span>

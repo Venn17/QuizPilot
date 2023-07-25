@@ -1,0 +1,386 @@
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.w3-main .navbar .actived {
+    text-decoration: underline
+}
+
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown {
+    float: right;
+    overflow: hidden;
+    display: flex;
+}
+
+.dropdown .dropbtn {
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    position: relative;
+}
+
+.dropdown p {
+    color: white;
+    border-left: 1px solid white;
+    padding: 15px 15px 0 15px;
+    margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+    background-color: red;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 52px;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    opacity: 1;
+    transition: opacity 0.6s;
+    margin-bottom: 15px;
+}
+
+.alert.success {
+    background-color: #04AA6D;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+.w3-theme-d3 {
+    padding: 3px !important;
+}
+
+/* w3-side bar form */
+.w3-sidebar .menu_text {
+    font-size: 50px;
+}
+
+.form-search button {
+    position: absolute;
+    border: none;
+    background: #FFFFFF;
+    margin-top: 13px;
+    margin-left: -40px;
+}
+
+.w3-sidebar .form-search button i {
+    margin-left: -10px;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+    color: #444;
+    cursor: pointer;
+    background: none;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+.accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212";
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    max-height: 0;
+}
+
+.panel ul {
+    margin-left: 20px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.panel li a {
+    font-size: 16px;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    display: block
+}
+
+.accordion1:hover .panel1 {
+    max-height: 60px !important;
+}
+
+/* Style the search box */
+#mySearch {
+    width: 80%;
+    font-size: 18px;
+    padding: 11px;
+    border: 1px solid #ddd;
+}
+
+/* Style the navigation menu */
+#myMenu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style the navigation links */
+#myMenu li a, #myMenu li button {
+    padding: 12px;
+    text-decoration: none;
+    color: black;
+    display: block
+}
+
+#myMenu li a:hover, #myMenu li button:hover, .panel li a:hover {
+    background-color: #eee;
+}
+
+/* Header */
+#portfolio .w3-container .w3-right i {
+    font-size: 30px;
+    padding: 16px 20px;
+    margin-top: 10px;
+    border-radius: 50%;
+    background: #000000;
+    color: #FFFFFF;
+}
+
+.switch {
+    cursor: pointer;
+}
+
+.form-add-post {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #FFFFFF;
+    z-index: 99999;
+}
+
+.form-add-post form {
+    padding: 0 15px;
+}
+
+.form-add-post .form-input {
+    width: 50%;
+    position: absolute;
+    top: 370px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-add-post .form-input label {
+    font-size: 24px;
+    width: 20%;
+}
+
+.form-add-post .form-input select {
+    font-size: 20px;
+    padding: 20px;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.form-add-post .form-input input, .form-add-post .form-input textarea {
+    width: 100%;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid gray;
+}
+
+.form-add-post .form-input input:focus {
+    border: none;
+}
+
+.close-switch {
+    cursor: pointer;
+}
+
+.detail-img {
+    width: 60%;
+    margin: 20px 20%;
+}
+
+.list-test {
+    background: #FFFFFF;
+    margin-top: 30px;
+}
+
+.list-test .d-flex {
+    display: flex;
+}
+
+.list-test ul li {
+    padding: 3px 13px;
+    background: #00a300;
+    color: #FFFFFF;
+}
+
+.list-test a {
+    text-decoration: none;
+}
+
+.list-comment {
+    margin-top: 20px;
+}
+
+.list-comment .comment {
+    padding: 10px;
+    border-radius: 10px;
+    background: #f1f1f1;
+    height: 65px;
+}
+
+.list-comment .img-comment {
+    width: 10%;
+}
+
+.list-comment img {
+    width: 45px;
+    border-radius: 20px;
+}
+
+.list-comment .comment-content {
+    width: 90%;
+    line-height: 10px;
+}
+
+.comment {
+    margin: 20px 5%;
+    padding: 50px;
+    width: 90%;
+}
+
+.socket-comment {
+    margin: 20px 5%;
+    padding: 10px;
+    border-radius: 10px;
+    width: 90%;
+    height: 65px;
+    background: #f1f1f1;
+}
+
+.comment form input, .socket-comment form input {
+    width: 90%;
+    border: 1px solid gray;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.comment form i, .socket-comment form i {
+    color: #00aac1;
+    font-size: 24px;
+}
+
+.card-profile {
+    margin: 0 20%;
+}
+
+.img_avatar {
+    margin: 50px 30%;
+}
+
+.img_avatar img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.img_avatar img:hover {
+    scale: 1.1;
+    transition: 1s ease-in-out;
+}
+
+.button-profile {
+    margin-right: 10%;
+    margin-top: 10px;
+}
+
+.post-update {
+    background: #FFFFFF;
+    margin: 30px 0;
+    padding: 30px;
+    width: 89%;
+}
+
+.post-update select {
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.sort_ajax {
+    width: 10%;
+    padding: 14px 30px;
+    border: 1px solid gray;
+    position: absolute;
+    margin-top: -51px;
+    left: 85%;
+}

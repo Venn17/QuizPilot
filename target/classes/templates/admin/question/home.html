@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<!-- Mirrored from www.w3schools.com/w3css/tryw3css_templates_analytics.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jun 2022 03:34:48 GMT -->
+<head>
+    <title>Quiz Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" th:href="@{/access/Desing-1-32.png}">
+    <link rel="stylesheet" href="/access/www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="/access/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/all.css}">
+    <style>
+        html, body, h1, h2, h3, h4, h5 {
+            font-family: "Raleway", sans-serif
+        }
+    </style>
+</head>
+<body th:with="active='question' , totalPages = 10, currentPage = 5" load="question">
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i
+            class="fa fa-bars"></i> &nbsp;Menu
+    </button>
+    <span class="w3-bar-item w3-right">Logo</span>
+</div>
+
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+    <div class="w3-container w3-row">
+        <div class="w3-col s4">
+            <img src="/access/www.w3schools.com/w3images/avatar2.png" class="w3-circle w3-margin-right"
+                 style="width:46px">
+        </div>
+        <div class="w3-col s8 w3-bar">
+            <span sec:authorize="isAuthenticated()">Welcome, <strong sec:authentication="name"></strong></span><br>
+            <a th:href="@{/logout}" class="w3-bar-item w3-button"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout</a>
+        </div>
+    </div>
+    <span th:replace="~{fragments/sideBar.html :: span}"></span>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+     title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+    <!-- Header -->
+    <header class="w3-container w3-padding-24 w3-margin-bottom" style="padding-top:22px">
+        <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
+    </header>
+
+    <div class="w3-container">
+        <h2>Question Management</h2>
+        <p></p>
+        <div class="w3-row">
+            <div class="w3-col">
+                <p class="w3-center w3-text-green" th:text="${message}"></p>
+                <div class="search-bar-and-more w3-light-gray w3-center">
+                    <div class="w3-bar-item w3-center w3-padding" style="display: block">
+                        <div class="w3-bar" style="width: 50%">
+                            <input type="text" class="w3-input" id="search-value" placeholder="Search here.....">
+                        </div>
+                    </div>
+                    <div class="filter w3-center">
+                        <div class="w3-dropdown-click" style="min-width: 200px">
+                            <input type="hidden" value="" id="subjectFilter">
+                            <select class="w3-select w3-light-gray" id="subject" onchange="changeSubjectFilter(this)">
+                                <option value="">All subject</option>
+                                <option th:each="subject : ${subjectList}" th:text="${subject.name}"
+                                        th:value="${subject.id}"></option>
+                            </select>
+                        </div>
+                        <div class="w3-dropdown-click" style="min-width: 200px">
+                            <input type="hidden" value="" id="course">
+                            <select class="w3-select w3-light-gray course-selector w3-hide"
+                                    th:each="subject : ${subjectList}"
+                                    th:id="'course-of-'+${subject.id}">
+                                <option value="">All course</option>
+                                <option th:each="course : ${subject.lstCourse}" th:text="${course.name}"
+                                        th:value="${course.id}"></option>
+                            </select>
+                            <select class="w3-select w3-light-gray course-selector w3-show" id="course-of-">
+                                <option value="">All course</option>
+                                <option th:each="course : ${courseList}" th:text="${course.name}"
+                                        th:value="${course.id}"></option>
+                            </select>
+                        </div>
+                        <div class="w3-dropdown-click" style="min-width: 200px">
+                            <select class="w3-select w3-light-gray" id="level">
+                                <option value="">All level</option>
+                                <option th:each="level : ${levelList}" th:text="${level}" th:value="${level}"></option>
+                            </select>
+                        </div>
+                        <div class="w3-dropdown-click">
+                            <button class="w3-button" onclick="toggleOrderRule()">
+                                Order by : <span id="current-order-rule">Newest</span> <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="w3-dropdown-content w3-bar-block w3-white w3-card-4" id="order-rule-list">
+                                <button class="w3-bar-item w3-button w3-text-black order-by-btn" rule="DESC">
+                                    Newest
+                                </button>
+                                <button class="w3-bar-item w3-button w3-text-black order-by-btn" rule="ASC">Oldest
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w3-button w3-green" type="button" id="search-btn">
+                        <i class="fa fa-search"></i>
+                        <span>Search</span>
+                    </button>
+
+                </div>
+                <div class="w3-bar w3-light-grey">
+                    <a th:href="@{/admin/question}" class="w3-bar-item w3-button w3-green">List</a>
+                    <a th:href="@{/admin/question/add}" class="w3-bar-item w3-button w3-hide-small">Add a New</a>
+
+                </div>
+                <br class="w3-hide-small">
+            </div>
+        </div>
+        <div class="min-h-50vh">
+            <table class="w3-table w3-hover-border-blue w3-hoverable w3-border ">
+                <thead>
+                <tr>
+                    <th style="width: 20%">Title</th>
+                    <th style="width: 20%">Course</th>
+                    <th style="width: 10%">Level</th>
+                    <th style="width: 50%">List of answer</th>
+                </tr>
+
+                </thead>
+                <tbody id="quest-table-body">
+
+                <tr th:each="question,loopstt:${questions}" class="hov-darken cur-pointer redirect-to w3-border-bottom"
+                    th:href="@{/admin/question/edit/{id} (id = ${question.id}) }">
+                    <td th:text="${question.text}"></td>
+                    <td th:text="${question.level}"></td>
+                    <td>
+                        <div class="" th:each="answer : ${question.answerList}">
+                            <div th:class="${(answer.isCorrect)?'w3-green w3-col m6 w3-border':'w3-col m6 w3-border'}"
+                                 th:text="${answer.text}">
+
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="w3-margin">
+            <div class="d-flex flex-x align-x-center" id="page-selection">
+                <button th:if="${currentPage!=1}" th:href="@{'/admin/subjects?page='+${currentPage-1}}"
+                        class="w3-button w3-hover-black page-select-pre">«
+                </button>
+
+
+                <button th:class="'w3-button page-select-button ' + ${(currentPage == i)?'w3-black':''}"
+                        th:text="${i}" th:value="${i}" th:each="i:${#numbers.sequence(1,totalPages)}">
+                    Page
+                </button>
+
+
+                <a href="#" th:if="${currentPage < totalPages}"
+                   th:href="@{'/admin/subjects?page='+${currentPage+1}}"
+                   class="w3-button w3-hover-black page-select-pre">»
+                </a>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/footer :: div}"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script th:src="@{/js/everything.js}"></script>
+</body>
+<!-- Mirrored from www.w3schools.com/w3css/tryw3css_templates_analytics.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jun 2022 03:34:50 GMT -->
+</html>
+

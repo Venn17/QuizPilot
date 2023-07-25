@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns=""
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<!-- Mirrored from www.w3schools.com/w3css/tryw3css_templates_analytics.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jun 2022 03:34:48 GMT -->
+<head>
+    <title>Quiz Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" th:href="@{/access/Desing-1-32.png}">
+    <link rel="stylesheet" href="/access/www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="/access/maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/access/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/all.css}">
+    <link rel="stylesheet" th:href="@{/access/home.css}">
+    <style>
+        html, body, h1, h2, h3, h4, h5 {
+            font-family: "Raleway", sans-serif
+        }
+    </style>
+</head>
+<body th:with="active='user'">
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i
+            class="fa fa-bars"></i> &nbsp;Menu
+    </button>
+    <span class="w3-bar-item w3-right">Logo</span>
+</div>
+
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+    <div class="w3-container w3-row">
+        <div class="w3-col s4">
+            <img src="/access/www.w3schools.com/w3images/avatar2.png" class="w3-circle w3-margin-right"
+                 style="width:46px">
+        </div>
+        <div class="w3-col s8 w3-bar">
+            <span sec:authorize="isAuthenticated()">Welcome, <strong sec:authentication="name"></strong></span><br>
+            <a th:href="@{/logout}" class="w3-bar-item w3-button"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout</a>
+        </div>
+    </div>
+    <span th:replace="~{/fragments/sideBar :: span}"></span>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+     title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+    <!-- Header -->
+    <header class="w3-container w3-padding-24 w3-margin-bottom" style="padding-top:22px">
+        <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
+    </header>
+    <span th:replace="~{/fragments/notice :: span}"></span>
+    <div class="w3-container">
+        <h2>User Management</h2>
+        <p></p>
+        <div class="w3-row">
+            <div class="w3-col">
+                <div class="w3-bar w3-light-grey">
+                    <a th:href="@{/admin/user}" class="w3-bar-item w3-button w3-green">List</a>
+                    <a th:href="@{/admin/user/registration}" class="w3-bar-item w3-button w3-hide-small">Add a New</a>
+                    <div class="w3-dropdown-hover w3-right">
+                        <button class="w3-button">
+                            Order by <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="w3-dropdown-content w3-bar-block w3-white w3-card-4">
+                            <button class="w3-bar-item w3-button w3-text-black order-by-btn" orderByValue="DESC">
+                                Newest
+                            </button>
+                            <button class="w3-bar-item w3-button w3-text-black order-by-btn" orderByValue="ASC">Oldest
+                            </button>
+                        </div>
+                    </div>
+                    <div class="w3-bar-item w3-button w3-right">
+                        <div class="w3-bar">
+                            <input type="text" id="search-value" placeholder="Search here.....">
+                            <button type="button" id="search-btn"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <br class="w3-hide-small">
+            </div>
+        </div>
+        <table class="w3-table w3-hover-border-blue w3-hoverable w3-border">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th colspan="2">Options</th>
+            </tr>
+            </thead>
+            <tbody id="quest-table-body">
+            <tr th:each="user : ${userList}">
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.role}"></td>
+                <td><a th:href="@{/admin/user/update/{id}(id=${user.id})}"><i class="fa fa-wrench"></i></a></td>
+                <td><a th:href="@{/admin/user/delete/{id}(id=${user.id})}"><i class="fa fa-trash"></i></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="~{/fragments/footer :: div}"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script th:src="@{/js/everything.js}"></script>
+</body>
+<!-- Mirrored from www.w3schools.com/w3css/tryw3css_templates_analytics.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jun 2022 03:34:50 GMT -->
+</html>
+

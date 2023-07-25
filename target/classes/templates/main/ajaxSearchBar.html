@@ -1,0 +1,9 @@
+<li th:each="subject:${subjectList}">
+    <button class="accordion accordion1" th:text="${subject.name}">Subject name</button>
+    <div class="panel panel1">
+        <ul>
+            <li th:each="course : ${subject.lstCourse}"><a th:href="@{/course/{id}(id=${course.id})}"
+                                                           th:text="${course.name}"></a></li>
+        </ul>
+    </div>
+</li>

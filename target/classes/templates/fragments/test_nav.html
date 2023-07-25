@@ -1,0 +1,30 @@
+<span xmlns:th="http://www.thymeleaf.org">
+<p>There are many variations of passages
+    of Lorem Ipsum available, but the
+    majority have suffered alteration
+    in some form, by injected humour,
+    or randomised words which don't look
+    even slightly believable. If you
+    are going to use a passage of
+    Lorem Ipsum, you need to be sure
+    there isn't anything embarrassing
+    hidden in the middle of text.
+</p>
+<div class="w3-row">
+    <div class="w3-col">
+        <p>Horizontal:</p>
+        <div class="w3-bar w3-light-grey">
+            <a th:href="@{/admin/test}" class="w3-bar-item w3-button">List</a>
+            <a th:href="@{/admin/test/new}" class="w3-bar-item w3-button w3-hide-small">Create New Test</a>
+
+            <div class="w3-bar-item w3-button w3-right">
+                <form class="w3-bar">
+                    <input type="text" placeholder="Search here.....">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+        <br class="w3-hide-small">
+    </div>
+</div>
+</span>

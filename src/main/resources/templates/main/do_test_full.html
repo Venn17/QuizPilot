@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Learning Code Everyday</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" th:href="@{/access/Desing-1-32.png}">
+    <link rel="stylesheet" href="/access/www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="/access/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/access/home.css">
+    <link rel="stylesheet" th:href="@{/css/all.css}">
+    <link rel="stylesheet" th:href="@{/css/animation.css}">
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: "Raleway", sans-serif
+        }
+    </style>
+</head>
+<body class="w3-content cool-play-ground" style="max-width:1600px">
+
+<nav th:replace="~{/fragments/nav_user ::nav}"></nav>
+<!-- Sidebar/menu -->
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+     title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main transition-normal">
+    <div th:replace="~{/fragments/profile_user :: div}"></div>
+    <!--    Notice-->
+    <span th:replace="~{/fragments/notice :: span}"></span>
+    <!-- Header -->
+
+
+    <div class="" style="position: relative;min-height: 100vh">
+        <div class="a-lot-of-arrow">
+        </div>
+        <div class="">
+            <div th:name="${test.text}" th:duration="${test.duration}" th:totalScore="${test.question.size()}"
+                 class="w3-container" id="test-info">
+                <div id="start-button-holder">
+                    <div id="really-big-play-button">
+                        <i class="fa fa-play" aria-hidden="true"></i>
+                    </div>
+                    <button type="button" class="" id="start-test">
+                        <!--                        <i class="fa fa-play" aria-hidden="true"></i>-->
+                        <i class="fa fa-play" aria-hidden="true"></i>
+                    </button>
+
+                </div>
+                <div id="test-title">
+                    <div class="cloud ">
+                        <div class="circle" style="--n:0s"></div>
+                        <div class="circle" style="--n:1s"></div>
+                        <div class="circle" style="--n:2s"></div>
+                        <div class="circle" style="--n:3s"></div>
+                        <div class="circle" style="--n:4s"></div>
+                        <div class="circle" style="--n:5s"></div>
+                        <div class="circle" style="--n:6s"></div>
+                        <span class="cloud-text cloud-text-main"><b th:text="${test.text}"></b></span>
+                        <span class="cloud-text cloud-text-label"><b>Title</b></span>
+                    </div>
+
+                </div>
+                <div id="difficult">
+                    <div class="cloud ">
+                        <div class="circle" style="--n:0s"></div>
+                        <div class="circle" style="--n:1s"></div>
+                        <div class="circle" style="--n:2s"></div>
+                        <div class="circle" style="--n:3s"></div>
+                        <div class="circle" style="--n:4s"></div>
+                        <div class="circle" style="--n:5s"></div>
+                        <div class="circle" style="--n:6s"></div>
+                        <span class="cloud-text cloud-text-main">
+                            <span th:class="'make-cool-rainbow w3-padding-small difficult-'+${test.level}"
+                                  th:text="${test.level}"></span>
+                        </span>
+                        <span class="cloud-text cloud-text-label"><b>Difficult</b></span>
+                    </div>
+
+                </div>
+                <div id="total-question">
+                    <div class="cloud ">
+                        <div class="circle" style="--n:0s"></div>
+                        <div class="circle" style="--n:1s"></div>
+                        <div class="circle" style="--n:2s"></div>
+                        <div class="circle" style="--n:3s"></div>
+                        <div class="circle" style="--n:4s"></div>
+                        <div class="circle" style="--n:5s"></div>
+                        <div class="circle" style="--n:6s"></div>
+                        <span class="cloud-text cloud-text-main">
+                           <span th:text="${test.question.size()}"></span>
+                        </span>
+                        <span class="cloud-text cloud-text-label"><b>Total question</b></span>
+                    </div>
+                </div>
+                <div id="time-limit">
+                    <div class="cloud ">
+                        <div class="circle" style="--n:0s"></div>
+                        <div class="circle" style="--n:1s"></div>
+                        <div class="circle" style="--n:2s"></div>
+                        <div class="circle" style="--n:3s"></div>
+                        <div class="circle" style="--n:4s"></div>
+                        <div class="circle" style="--n:5s"></div>
+                        <div class="circle" style="--n:6s"></div>
+                        <span class="cloud-text cloud-text-main">
+                           <span th:text="${test.duration}"></span> minute
+                        </span>
+                        <span class="cloud-text cloud-text-label"><b>Time limit</b></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="counter" class="w3-green w3-center">
+                <div id="cute-clock" class="w3-text-green">
+                    <i class="fa fa-clock-o cur-pointer" aria-hidden="true"></i>
+                </div>
+                <div id="time-detail">
+                    <h1>Time remain</h1>
+                    <span id="hour"><i></i> </span> :
+                    <span id="minute"><i></i> </span> :
+                    <span id="second"><i></i> </span>
+                </div>
+            </div>
+            <div class="w3-container cool-stuff" id="test-form">
+                <input type="hidden" id="testId" th:value="${test.id}"/>
+                <div class="w3-margin-bottom">
+                    <div th:each="question , questionLoopStt : ${test.question}"
+                         th:style="'--delayQuestion:0.'+${questionLoopStt.index*2}+'s'"
+                         class="question-block w3-margin-bottom w3-padding">
+                        <div class="question-title"><b>Question <span th:text="${questionLoopStt.index+1}"></span>: </b>
+                            <span th:text="${question.text}"></span></div>
+                        <div class="answer w3-row w3-margin-bottom">
+                            <div th:each="answer,answerLoopStt : ${question.answerList}" class="w3-col m6">
+                                <div class="answer-group " th:target="'answer-'+${answer.id}">
+                                    <input class="answer-input w3-radio" th:id="'answer-'+${answer.id}" hidden="true"
+                                           th:name="'question-'+${question.id}" type="radio" th:value="${answer.id}">
+                                    <span></span>
+                                    <span th:text="${answer.text}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="submit-section" style="position: relative">
+                        <button class="cur-pointer" onmouseenter="hoverSubmitIn()" onmouseleave="hoverSubmitOut()"
+                                type="button" id="submit-answer">Submit
+                        </button>
+                        <button class="cur-pointer mua-quat d-none" onmouseenter="hoverSubmitIn()"
+                                onmouseleave="hoverSubmitOut()"
+                                type="button">
+                            <div class="quat">
+                                <i class="fa fa-hand-paper-o quat-left" aria-hidden="true"></i>
+                                <i class="fa fa-hand-paper-o quat-right" aria-hidden="true"></i>
+                            </div>
+                        </button>
+                        <div class="rainbow-train-of-arrow">
+                            <i class="fa fa-play" aria-hidden="true" style="--effect:0.1s"></i>
+                            <i class="fa fa-play" aria-hidden="true" style="--effect:0.2s"></i>
+                            <i class="fa fa-play" aria-hidden="true" style="--effect:0.3s"></i>
+                            <i class="fa fa-play" aria-hidden="true" style="--effect:0.4s"></i>
+                            <i class="fa fa-play" aria-hidden="true" style="--effect:0.5s"></i>
+                            <i class="fa fa-play" aria-hidden="true" style="--effect:0.6s"></i>
+                            <i class="fa fa-play" aria-hidden="true" style="--effect:0.7s"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--    <span th:replace="~{/fragments/footer_user :: span}"></span>-->
+</div>
+
+<div id="alert-block">
+    <div class="alert-content w3-green">
+        <div class="alert-header"><h3>Submit answer success</h3></div>
+        <div class="alert-context">
+            <p class="alert-info">Do you wish to delete this question</p>
+            <div class="alert-detail w3-section"></div>
+        </div>
+        <div class="alert-decision">
+            <button class="w3-button w3-white" id="alert-btn-confirm">Confirm</button>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+</script>
+<script src="/access/home.js"></script>
+<script th:replace="~{/fragments/js_index :: script}"></script>
+<script th:src="@{/js/everything.js}"></script>
+<script th:src="@{/js/animation.js}"></script>
+<!-- Mirrored from www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_portfolio&stacked=h by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jun 2022 03:41:24 GMT -->
+</html>

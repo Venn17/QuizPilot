@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Learning Code Everyday</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" th:href="@{/access/Desing-1-32.png}">
+    <link rel="stylesheet" href="/access/www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <link rel="stylesheet" href="/access/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/access/home.css">
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: "Raleway", sans-serif
+        }
+    </style>
+</head>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<body class="w3-light-grey w3-content" style="max-width:100%">
+
+<!-- Sidebar/menu -->
+<nav th:replace="~{/fragments/nav_user ::nav}"></nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+     title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px">
+    <!--    Option -->
+    <div th:replace="~{/fragments/profile_user :: div}"></div>
+    <!--    Notice-->
+    <span th:replace="~{/fragments/notice :: span}"></span>
+    <!-- Header -->
+    <header id="portfolio">
+        <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i
+                class="fa fa-bars"></i></span>
+        <div class="w3-container w3-padding-48">
+            <div class="w3-row">
+                <div class="w3-left">
+                    <b><h1 th:text="${post.title}" style="font-size: 60px"></h1></b>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- First Photo Grid-->
+    <div class="w3-row-padding">
+        <div class="w3-container w3-margin-bottom">
+            <div class="w3-container w3-white">
+                <i><h3 th:text="${#dates.format(post.createdDate, 'dd/MM/yyyy')}"></h3></i>
+                <hr>
+                <div id="content" th:utext="${post.content}"></div>
+                <div th:each="imgPost:${imgPosts}">
+                    <script type="text/javascript" th:inline="javascript">
+                        console.log("ok");
+                        i = [[${imgPostStat.index}]];
+                        $($("#content").find("img")[i]).attr("src", "http://192.168.8.95:9000/tung/" + [[${imgPost.img}]]);
+                    </script>
+                </div>
+                <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>
+                     Like
+                </button>
+                <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom toggleButton"><i
+                        class="fa fa-comment"></i>  Comment
+                </button>
+            </div>
+            <div class="w3-padding-48 list-test">
+                <div class="w3-row" style="margin-left: 40px"><h3>Related Tests</h3></div>
+                <div class="w3-row d-flex">
+                    <ul th:each="test : ${testList}">
+                        <a th:href="@{/play/{id}(id=${test.id})}">
+                            <li><b th:text="${test.text}"></b> --
+                                <i th:text="${test.level}"></i></li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div class="list-comment w3-white w3-container" id="messageArea">
+                <div th:each="c : ${commentList}" class="comment">
+                    <div class="img-comment w3-left">
+                        <img src="https://www.yamcode.com/img/default-avatar.png">
+                    </div>
+                    <div class="comment-content w3-right">
+                        <h4><b th:text="${c.userComment.name}"></b></h4>
+                        <i class="w3-right" th:text="${#dates.format(c.createdDate, 'd/M/y')}"></i>
+                        <p th:text="${c.text}"></p>
+                    </div>
+                </div>
+            </div>
+            <span th:replace="~{fragments/comment :: span}"></span>
+        </div>
+        </a>
+
+
+        <span th:replace="~{/fragments/footer_user :: span}"></span>
+    </div>
+</div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"
+        integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn"
+        crossorigin="anonymous">
+</script>
+<script>
+    $(document).ready(function () {
+        $(".toggleButton").click(function () {
+            $(".comment").toggle();
+        });
+    });
+</script>
+<script src="/access/home.js"></script>
+<script th:replace="~{/fragments/js_index :: script}"></script>
+<script src="/js/main.js"></script>
+<!-- Mirrored from www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_portfolio&stacked=h by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jun 2022 03:41:24 GMT -->
+</html>

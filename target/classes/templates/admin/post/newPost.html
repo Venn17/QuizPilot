@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<!-- Mirrored from www.w3schools.com/w3css/tryw3css_templates_analytics.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jun 2022 03:34:48 GMT -->
+<head>
+    <title>Quiz Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="icon" type="image/x-icon" th:href="@{/access/Desing-1-32.png}">
+    <link rel="stylesheet" th:href="@{/access/www.w3schools.com/w3css/4/w3.css}">
+    <link rel="stylesheet"
+          th:href="@{/access/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/access/css/main.css}">
+    <style>
+        html, body, h1, h2, h3, h4, h5 {
+            font-family: "Raleway", sans-serif
+        }
+    </style>
+</head>
+<link rel="stylesheet"
+      th:href="@{/richtexteditor/rte_theme_default.css}"/>
+<script type="text/javascript" th:src="@{/richtexteditor/rte.js}"></script>
+<script type="text/javascript"
+        th:src='@{/richtexteditor/plugins/all_plugins.js}'></script>
+<script type="text/javascript"
+
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<body th:with="active='post'">
+<script>
+    let sjDefault;
+</script>
+
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i
+            class="fa fa-bars"></i> &nbsp;Menu
+    </button>
+    <span class="w3-bar-item w3-right">Logo</span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+    <div class="w3-container w3-row">
+        <div class="w3-col s4">
+            <img src="/access/www.w3schools.com/w3images/avatar2.png" class="w3-circle w3-margin-right"
+                 style="width:46px">
+        </div>
+        <div class="w3-col s8 w3-bar">
+            <span sec:authorize="isAuthenticated()">Welcome, <strong sec:authentication="name"></strong></span><br>
+            <a th:href="@{/logout}" class="w3-bar-item w3-button"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout</a>
+        </div>
+    </div>
+
+    <span th:replace="~{fragments/sideBar :: span}"></span>
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+     title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+    <!-- Header -->
+    <header class="w3-container w3-padding-24 w3-margin-bottom" style="padding-top:22px">
+        <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
+    </header>
+
+    <div class="w3-container">
+        <h2>Post Management</h2>
+        <p>Dess</p>
+        <div class="w3-row">
+            <div class="w3-col">
+                <p>Horizontal:</p>
+                <div class="w3-bar w3-light-grey">
+                    <a th:href="@{/admin/posts}" class="w3-bar-item w3-button ">List</a>
+                    <a th:href="@{/admin/posts/new}" class="w3-bar-item w3-button w3-hide-small w3-green">Add a New</a>
+                    <div class="w3-bar-item w3-button w3-right">
+                        <form class="w3-bar">
+                            <input type="text" placeholder="Search here.....">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <br class="w3-hide-small">
+            </div>
+        </div>
+        <div id="valid">
+            <div class="w3-container w3-card w3-light-grey" style="width:80%;">
+                <p align="left">
+                    <label>Title:</label>
+                    <input class="w3-input w3-border" required autofocus type="text" name="title_rte" id="title_rte">
+                    <label>Subject:</label>
+                    <select name="subject" class="w3-input w3-border" id="subject">
+                        <option th:each="subject:${subjects}" th:if="${#lists.size(subject.lstCourse)}>0"
+                                th:value="subject+${subject.id}"
+                                th:text="${subject.name}"></option>
+                    </select>
+                <div id="divCourse">
+                    <select id="eachDivCourse" name="course" class="w3-input w3-border" th:each="subject:${subjects}"
+                            style="display: none"
+                            th:id="subject+${subject.id}">
+                        <option th:each="course:${courses}" th:if="${course.subject.id==subject.id}"
+                                th:value="${course.id}" th:text="${course.name}"></option>
+                    </select>
+                </div>
+
+                <textarea id="div_editor1">
+                        <p>This is a default toolbar demo of Rich text editor.</p>
+                    </textarea>
+                </p>
+                <p>
+                    <input id="sub" class="w3-btn w3-block w3-green w3-m"
+                           type="submit" value="Submit"/>
+                    <span id="loadSub" class="buttonload w3-btn w3-block w3-green w3-m w3-hide">
+                        <i class="fa fa-spinner fa-spin"></i>Loading
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/footer :: div}"></div>
+</div>
+
+<script type="text/javascript" th:inline="javascript">
+    let target;
+    target = $("#subject").val();
+    $("#" + target).css("display", "block");
+    $("#subject").change(function () {
+        target = $("#subject").val();
+        $("#" + target).css("display", "block");
+        $("#" + target).siblings().css("display", "none");
+    });
+
+    // richtext editor
+    let editor1 = new RichTextEditor("#div_editor1");
+    let formData = new FormData();
+    checkClick();
+
+    function checkClick() {
+        $("#sub").click(function () {
+            $("#sub").toggleClass("w3-hide");
+            $("#loadSub").toggleClass("w3-hide");
+            let val = $("#div_editor1").val();
+            let src, file, objectURL;
+            let awaitThis;
+
+            formData.delete("files");
+            if ($(val).find("img")[0] != null) {
+                $(val).find("img").each(function (i) {
+                    src = $(this).attr("src");
+                    awaitThis = fetch(src)
+                        .then(res => res.blob()) // Gets the response and returns it as a blob
+                        .then(blob => {
+                            objectURL = URL.createObjectURL(blob);
+                            file = new File([blob], "img.png");
+                            formData.append("files", file, file.name);
+                        });
+                })
+                awaitThis.then(function () {
+                    ajax();
+                })
+            } else {
+                ajax();
+            }
+        });
+    }
+
+    function ajax() {
+        target = $("#subject").val();
+        let courseId = $("#" + target).val();
+        let content = editor1.getHTMLCode();
+        let title = $("#title_rte").val();
+        formData.delete("title");
+        formData.delete("content");
+        formData.delete("courseId");
+        formData.append("title", title);
+        formData.append("content", content);
+        formData.append("courseId", courseId);
+        $.ajax({
+            url: 'http://localhost:8080/admin/posts/new',
+            type: 'POST',
+            data: formData,
+            success: function (res) {
+                if (res == "true") {
+                    window.location.replace("http://localhost:8080/admin/posts");
+                } else {
+                    $("#valid").empty();
+                    $("#valid").html(res);
+                    editor1 = new RichTextEditor("#div_editor1");
+                    checkClick();
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        return true;
+
+    }
+
+</script>
+</body>
+
+<!-- Mirrored from www.w3schools.com/w3css/tryw3css_templates_analytics.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jun 2022 03:34:50 GMT -->
+</html>

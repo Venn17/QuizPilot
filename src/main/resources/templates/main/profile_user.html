@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Learning Code Everyday</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" th:href="@{/access/Desing-1-32.png}">
+    <link rel="stylesheet" href="/access/www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="/access/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/access/maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/access/home.css" >
+    <style>
+        body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+        .navbar{overflow: inherit;}.dropdown{overflow: inherit}
+    </style>
+</head>
+<body class="w3-content" style="max-width:100%">
+
+<!-- Sidebar/menu -->
+<nav th:replace="~{/fragments/nav_user ::nav}"></nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px">
+    <!--    Option -->
+    <div th:replace="~{/fragments/profile_user :: div}"></div>
+    <!--    Notice-->
+    <span th:replace="~{/fragments/notice :: span}"></span>
+    <!-- Header -->
+    <!-- Page Container -->
+    <div class="w3-content w3-margin-top" style="max-width:100%">
+        <div class="w3-row-padding">
+            <h1 class="text-center">My Profile</h1>
+            <div class="col-8 col-lg-8 col-md-8 col-sm-8 card-profile">
+                <div class="img_avatar">
+                    <img src="https://www.yamcode.com/img/default-avatar.png" alt="Avatar">
+                </div>
+                <table class="w3-table w3-striped w3-border" style="width: 90%;line-height: 20px">
+                    <tr>
+                        <th>Name</th>
+                        <td class="w3-right" th:text="${user.name}"></td>
+                    </tr>
+                    <tr>
+                        <th>Age</th>
+                        <td class="w3-right">30</td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <td class="w3-right">France</td>
+                    </tr>
+                    <tr>
+                        <th>Password</th>
+                        <td class="w3-right">********</td>
+                    </tr>
+                    <tr>
+                        <th>Role</th>
+                        <td class="w3-right" th:text="${user.role}"></td>
+                    </tr>
+                </table>
+                <div class="w3-right button-profile">
+                    <a th:href="@{/home}"><button type="button" class="w3-button w3-red w3-left close-switch">Back</button></a>
+                    <a th:if="${user.userType} == 'database'" th:href="@{/me/profile/update/{id}(id = ${user.id})}"><button type="button" class="w3-button w3-green w3-right">Setting</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script th:src="@{/access/home.js}"></script>
+<script th:replace="~{/fragments/js_index :: script}"></script>
+<!-- Mirrored from www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_portfolio&stacked=h by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jun 2022 03:41:24 GMT -->
+</html>

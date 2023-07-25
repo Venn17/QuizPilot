@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Learning Code Everyday</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" th:href="@{/access/Desing-1-32.png}">
+    <link rel="stylesheet" href="/access/www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="/access/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/access/home.css">
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: "Raleway", sans-serif
+        }
+    </style>
+</head>
+<body class="w3-light-grey w3-content" style="max-width:1600px">
+
+<!-- Sidebar/menu -->
+<nav th:replace="~{/fragments/nav_user ::nav}"></nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+     title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px">
+    <!--    Option -->
+    <div th:replace="~{/fragments/profile_user :: div}"></div>
+    <!--    Notice-->
+    <span th:replace="~{/fragments/notice :: span}"></span>
+    <!-- Header -->
+    <header id="portfolio">
+        <a href="#"><img src="/access/www.w3schools.com/w3images/avatar_g2.jpg" style="width:65px;"
+                         class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+        <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i
+                class="fa fa-bars"></i></span>
+        <div class="w3-container w3-padding-48">
+            <div class="w3-row">
+                <div class="w3-left">
+                    <h1 style="font-size: 60px"><b
+                            th:text="${course.subject.name} + ' :: ' + ${course.name}">Course</b>
+                    </h1>
+                    <div class="w3-row">
+                        <div class="w3-col m6 l6" style="padding: 36px">
+                            <a th:href="@{/course/{id}/test (id=${course.id}) }" style="text-decoration: none">
+                                <div class="w3-card-4">
+                                    <img style="width: 100%;height: 400px"
+                                         src="https://tapchitamlyhoc.com/wp-content/uploads/2021/11/quiz-test-kiem-tra-hoi-chung-so-giao-tiep-xa-hoi-2.jpg"
+                                         alt="Alps">
+                                    <div class="w3-container w3-center">
+                                        <p>Tests</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="w3-col m6 l6" style="padding: 36px">
+                            <a th:href="@{/course/{id}/post (id=${course.id}) }" style="text-decoration: none">
+                                <div class="w3-card-4">
+                                    <img style="width: 100%;height: 400px"
+                                         src="https://thumbs.dreamstime.com/b/post-button-isolated-red-word-internet-posting-concept-94448888.jpg"
+                                         alt="Alps">
+                                    <div class="w3-container w3-center">
+                                        <p>Posts</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- First Photo Grid-->
+    <div class="w3-row-padding">
+        <div class="w3-third w3-container w3-margin-bottom" th:each="post : ${postList}">
+            <img src="/access/www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%"
+                 class="w3-hover-opacity">
+            <div class="w3-container w3-white">
+                <p><b th:text="${post.title}"></b><i class="w3-right"
+                                                     th:text="${#dates.format(post.createdDate, 'dd/MM/yyyy')}"></i>
+                </p>
+                <hr>
+                <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><a
+                        th:href="@{/post/detail/{id}(id = ${post.id})}"><i class="fa fa-comment"></i>  Comment</a>
+                </button>
+                <button type="button" class="w3-button w3-theme-d3 w3-margin-bottom"><a
+                        th:href="@{/post/detail/{id}(id = ${post.id})}"><i class="fa fa-eye"></i>  View</a></button>
+            </div>
+        </div>
+    </div>
+    <span th:replace="~{/fragments/footer_user :: span}"></span>
+</div>
+
+<!--    Form post-->
+<div class="form-add-post">
+    <div class="align-items-center justify-content-center">
+        <form class="form-input" th:action="@{/post/store}" method="post">
+            <h2 class="w3-center">Form Input</h2>
+            <input hidden="hidden" name="author" th:value="1">
+
+            <label for="title">Title</label><br>
+            <input type="text" id="title" name="title" placeholder="Title....." required="true"><br><br>
+
+            <input hidden="hidden" name="createdDate" th:value="${#dates.format(#dates.createNow(), 'dd/MM/yyyy')}">
+
+            <label for="content">Content</label><br>
+            <textarea id="content" name="content" rows="5" placeholder="Content....."
+                      required="true"></textarea><br><br>
+
+            <label>Image</label><br>
+            <input type="file" name="image"><br><br>
+
+            <label for="course">Course</label>
+            <select id="course" name="course">
+                <option value="1">Course 1</option>
+                <option value="2">Course 2</option>
+                <option value="3">Course 3</option>
+            </select><br><br>
+            <button type="button" class="w3-button w3-red w3-left close-switch">Back</button>
+            <button type="submit" class="w3-button w3-green w3-right">Submit</button>
+        </form>
+    </div>
+</div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $('.switch').on('click', function () {
+        $('.form-add-post').fadeIn(400);
+    });
+
+    $('.close-switch').on('click', function () {
+        $('.form-add-post').fadeOut(400, function () {
+        });
+    });
+</script>
+<script src="/access/home.js"></script>
+<script th:replace="~{/fragments/js_index :: script}"></script>
+<!-- Mirrored from www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_portfolio&stacked=h by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jun 2022 03:41:24 GMT -->
+</html>

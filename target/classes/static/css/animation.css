@@ -1,0 +1,421 @@
+:root {
+    --color-1: rgba(255, 93, 93, 0.59);
+    --color-2: rgba(255, 223, 93, 0.59);
+    --color-3: rgba(123, 255, 93, 0.59);
+    --color-4: rgba(93, 255, 217, 0.59);
+    --color-5: rgba(93, 125, 255, 0.59);
+    --color-6: rgba(225, 93, 255, 0.59);
+    --color-7: rgba(255, 93, 204, 0.59);
+}
+
+.cool-play-ground {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #94c5f8 1%, #a6e6ff 70%, #b1b5ea 100%);
+}
+
+#test-info {
+    transition: 2s;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    color: whitesmoke;
+}
+
+#start-button-holder {
+    /*overflow: hidden;*/
+    /*background: linear-gradient(to bottom, #94c5f8 1%,#a6e6ff 70%);*/
+    /*background: linear-gradient(to bottom, #94c5f8 1%,#a6e6ff 70%,#b1b5ea 100%);*/
+    transition: linear 0.3s;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    top: 40%;
+    left: 50%;
+}
+
+#really-big-play-button {
+    transition: 0.5s;
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    font-size: 200px;
+    transform: translate(-40%, -50%);
+
+}
+
+#start-test {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    /*display: inline-block;*/
+    transition: 0.5s;
+    color: rgba(255, 255, 255, 1);
+    z-index: 5;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+#start-test:hover {
+    font-size: 35px;
+    text-shadow: 0px 0px 20px #fff;
+}
+
+.a-lot-of-arrow {
+    top: 0%;
+    left: 0%;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    /*animation-name: leftToRight;*/
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+}
+
+.run-from-left-to-right {
+    animation-name: leftToRight;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+}
+
+.a-lot-of-arrow i {
+    transition: linear 10s;
+    z-index: -1;
+    position: absolute;
+}
+
+.question-block {
+    opacity: 0;
+    position: relative;
+    z-index: 1;
+    transition: 0.2s;
+    background: rgba(4, 0, 154, 0.4);
+    color: whitesmoke;
+}
+
+.question-block:hover {
+    z-index: 5;
+    box-shadow: 0px 0px 50px 1px rgba(4, 0, 154, 0.6);;
+    background: rgba(4, 0, 154, 0.6);
+}
+
+.question-active {
+    z-index: 5;
+    box-shadow: 0px 0px 50px 1px rgba(4, 0, 154, 0.6);
+    background: rgba(4, 0, 154, 0.6);
+}
+
+.question-title {
+    font-size: 24px;
+    text-align: center;
+}
+
+.answer {
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+.answer .answer-group {
+    transition: 0.2s;
+    cursor: pointer;
+    padding: 5px 10px;
+    background: #04009A;
+    margin: 10px;
+}
+
+.answer .answer-group:hover {
+    background: #77ACF1;
+}
+
+.answer-active {
+    background: #3EDBF0 !important;
+    transform: translate(0px, -10px);
+}
+
+.answer-active-wrong {
+    transform: translate(0px, -10px);
+    background: #ff5d5d !important;
+}
+
+.answer-active-correct {
+    transform: translate(0px, -10px);
+    background: #14C38E !important;
+}
+
+.cloud {
+    background: whitesmoke;
+    width: 150px;
+    height: 100px;
+    position: relative;
+}
+
+.cloud .cloud-text {
+    text-align: center;
+    transition: 0.2s;
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+}
+
+.cloud .cloud-text-label {
+    opacity: 0;
+}
+
+.cloud:hover .cloud-text-main {
+    opacity: 0;
+}
+
+.cloud:hover .cloud-text-label {
+    opacity: 1;
+}
+
+.cloud .circle {
+    position: absolute;
+    width: 100px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background: whitesmoke;
+    animation-name: cloudMove;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+    animation-delay: calc(var(--n));
+
+}
+
+#test-title {
+    position: absolute;
+    top: 10%;
+    left: 30%;
+}
+
+#difficult {
+    position: absolute;
+    top: 50%;
+    left: 32%;
+}
+
+#total-question {
+    position: absolute;
+    top: 10%;
+    left: 60%;
+}
+
+#time-limit {
+    position: absolute;
+    top: 65%;
+    left: 55%;
+}
+
+.bounce-off {
+    animation-name: bounce-left-to-right;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+#test-form {
+    margin: 0 auto;
+    display: none;
+    width: 70%;
+    z-index: 15;
+    opacity: 1;
+    position: relative;
+}
+
+.question-block-init {
+    animation-duration: 1s;
+    transform: translate(0%, 100%);
+    animation-name: floatUp;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    animation-delay: var(--delayQuestion);
+}
+
+#time-detail i {
+    display: inline-block;
+    width: 60px;
+}
+
+.rainbow-train-of-arrow {
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+    width: 100px;
+    position: absolute;
+}
+
+.rainbow-train-of-arrow i {
+    top: -10px;
+    left: 10px;
+    color: rgba(245, 245, 245, 0.28);
+    transition: 0.2s;
+    position: absolute;
+    line-height: 20px;
+    font-size: 50px;
+}
+
+.submit-hovering {
+    animation-name: submitArrow;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+    animation-delay: calc(var(--effect) + 0.1s);
+}
+
+#submit-answer {
+    text-transform: uppercase;
+    color: black;
+    text-shadow: 0px 0px 1px black;
+    position: relative;
+    z-index: 21;
+    background: whitesmoke;
+    padding: 15px;
+    border: none;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translate(0%, 100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0%, 0%);
+        opacity: 1;
+    }
+}
+
+@keyframes floating {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    50% {
+        transform: translate(0px, -10px);
+    }
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+
+@keyframes leftToRight {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    100% {
+        transform: translate(150vw, 0%);
+    }
+}
+
+
+@keyframes bounce-left-to-right {
+    0% {
+        transform: translate(-50%, -50%);
+    }
+    25% {
+        transform: translate(-100%, -50%);
+    }
+    100% {
+        transform: translate(500px, -50%);
+    }
+}
+
+@keyframes cloudMove {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1);
+    }
+    75% {
+        transform: scale(0.9);
+    }
+}
+
+@keyframes submitArrow {
+    0% {
+        left: 0%;
+        opacity: 1;
+    }
+    100% {
+        left: 120%;
+        opacity: 0;
+    }
+}
+
+.cloud .circle:nth-child(1) {
+    top: -20%;
+    left: -10%;
+}
+
+.cloud .circle:nth-child(2) {
+    top: 8%;
+    left: -22%;
+}
+
+.cloud .circle:nth-child(3) {
+    top: 17%;
+    left: -10%;
+}
+
+.cloud .circle:nth-child(4) {
+    top: -10%;
+    left: 53%;
+}
+
+.cloud .circle:nth-child(5) {
+    top: 23%;
+    left: 45%;
+}
+
+.cloud .circle:nth-child(6) {
+    top: -10%;
+    left: 22%;
+}
+
+.cloud .circle:nth-child(7) {
+    top: 17%;
+    left: 10%;
+}
+
+.quat {
+    animation-name: epicMuaQuat;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes epicMuaQuat {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.quat .quat-left {
+    transform: rotate(-90deg);
+}
+
+.quat .quat-right {
+    transform: rotate(90deg);
+}

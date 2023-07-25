@@ -1,0 +1,27 @@
+<div class="navbar">
+    <a th:href="@{/home}" class="actived">Home</a>
+    <a th:href="@{/blog}">Blogs</a>
+    <div class="dropdown" th:if="${user != null}">
+        <button class="dropbtn" onclick="myFunction()">Options
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <p><u th:text="${user.name}"></u></p>
+        <div class="dropdown-content" id="myDropdown">
+            <a th:href="@{/me/profile/{id}(id = ${user.id})}"><i
+                    class="fa fa-user fa-fw w3-margin-right"></i>Profile</a>
+            <a th:href="@{/me/history}"><i class="fa fa-history w3-margin-right"></i>View History</a>
+            <a th:href="@{/logout}"><i class="fa fa-sign-out w3-margin-right"></i>Logout</a>
+        </div>
+    </div>
+    <div class="dropdown" th:if="${user == null}">
+        <button class="dropbtn" onclick="myFunction()">Options
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <p>Login : <u th:text="name"></u></p>
+        <div class="dropdown-content" id="myDropdown">
+            <a th:href="@{/login}"><i class="fa fa-sign-out w3-margin-right"></i>Login</a>
+        </div>
+    </div>
+
+
+</div>

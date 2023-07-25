@@ -1,0 +1,37 @@
+<span>
+    <!-- Footer -->
+    <footer class="w3-black w3-center w3-padding-24"><p>Designed by <b>BKAP Team</b> </p></footer>
+
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        let keyBar;
+        let formData = new FormData();
+        $("#mySearch").on('input', function () {
+            keyBar = $("#mySearch").val();
+            formData.delete("keyBar");
+            formData.append("keyBar", keyBar);
+            $.ajax({
+                url: 'http://localhost:8080/search',
+                type: 'POST',
+                data: formData,
+                success: function (res) {
+                    $("#myMenu").html(res);
+                    $(".accordion1").click(function () {
+                        $(this).toggleClass("active");
+                        if ($(this.nextElementSibling).css("max-height") == "0px") {
+                            $(this.nextElementSibling).css("max-height", "96px");
+                        } else {
+                            $(this.nextElementSibling).css("max-height", "0px");
+                        }
+                    })
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        })
+    </script>
+    <!-- End page content -->
+</span>

@@ -1,0 +1,56 @@
+<div id="valid">
+    <div class="w3-container w3-card w3-light-grey" style="width:80%;" xmlns:th="http://www.thymeleaf.org">
+        <p align="left">
+            <label>Title:</label>
+            <input class="w3-input w3-border" required autofocus type="text" th:value="${postRequest.title}"
+                   name="title_rte" id="title_rte">
+        <div th:object="${postRequest}">
+            <label class="w3-text-red" th:errors="*{title}"></label>
+        </div>
+        <div>
+            <label class="w3-text-red" th:text="${uniqueTitle}"></label>
+        </div>
+        <label>Subject:</label>
+        <select name="subject" class="w3-input w3-border" id="subject">
+            <option th:each="subject:${subjects}" th:if="${#lists.size(subject.lstCourse)}>0"
+                    th:value="subject+${subject.id}"
+                    th:text="${subject.name}"></option>
+        </select>
+        <div>
+            <select name="course" class="w3-input w3-border" th:each="subject:${subjects}" style="display: none"
+                    th:id="subject+${subject.id}">
+                <option th:each="course:${courses}" th:if="${course.subject.id==subject.id}"
+                        th:value="${course.id}" th:text="${course.name}"></option>
+            </select>
+        </div>
+        <div th:object="${postRequest}">
+            <label class="w3-text-red" th:errors="*{content}"></label>
+        </div>
+        <textarea id="div_editor1" th:utext="${postRequest.content}">
+    </textarea>
+        <div th:object="${postRequest}">
+            <label class="w3-text-red" th:errors="*{content}"></label>
+        </div>
+        </p>
+        <p>
+            <input id="sub" class="w3-btn w3-block w3-green w3-m"
+                   type="submit" value="Submit"/>
+            <span id="loadSub" class="buttonload w3-btn w3-block w3-green w3-m w3-hide">
+                        <i class="fa fa-spinner fa-spin"></i>Loading
+                    </span>
+        </p>
+    </div>
+</div>
+<script>
+    sjDefault = [[${post.course.subject.id}]];
+    $("#subject" + sjDefault).css("display", "block");
+    $("#subject").val("subject" + [[${post.course.subject.id}]]);
+    $("#subject" + [[${post.course.subject.id}]]).val([[${post.course.id}]]);
+    $("#subject").change(function () {
+        console.log("change");
+        target = $("#subject").val();
+        $("#" + target).css("display", "block");
+        $("#" + target).siblings().css("display", "none");
+    });
+
+</script>

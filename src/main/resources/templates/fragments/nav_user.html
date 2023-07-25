@@ -1,0 +1,30 @@
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar">
+    <h1 class="menu_text">Menu</h1>
+    <br>
+    <h3 class="text-center">Course</h3>
+    <br>
+    <ul id="myMenu">
+    <span th:if="${active} == 'post'">
+    <li th:each="subject : ${subjectList}">
+      <button class="accordion accordion1" th:text="${subject.name}"></button>
+      <div class="panel panel1">
+        <ul th:each="course : ${courseList}">
+          <li><a th:href="@{/course/{id}(id = ${course.id})}" th:if="${course.subject.id == subject.id}"
+                 th:text="${course.name}"></a></li>
+        </ul>
+      </div>
+    </li>
+    </span>
+        <span th:if="${active} == 'blog'">
+    <li th:each="subject : ${subjectList}">
+      <button class="accordion accordion1" th:text="${subject.name}"></button>
+      <div class="panel panel1">
+        <ul th:each="course : ${courseList}">
+          <li><a th:href="@{/blog/course/{id}(id = ${course.id})}" th:if="${course.subject.id == subject.id}"
+                 th:text="${course.name}"></a></li>
+        </ul>
+      </div>
+    </li>
+    </span>
+    </ul>
+</nav>

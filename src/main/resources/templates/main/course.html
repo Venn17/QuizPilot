@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Learning Code Everyday</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" th:href="@{/access/Desing-1-32.png}">
+    <link rel="stylesheet" href="/access/www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="/access/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/access/home.css">
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: "Raleway", sans-serif
+        }
+    </style>
+</head>
+<body class="w3-light-grey w3-content" style="max-width:1600px">
+
+<!-- Sidebar/menu -->
+<nav th:replace="~{/fragments/nav_user ::nav}"></nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+     title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px">
+    <!--    Option -->
+    <div th:replace="~{/fragments/profile_user :: div}"></div>
+    <!--    Notice-->
+    <span th:replace="~{/fragments/notice :: span}"></span>
+    <!-- Header -->
+    <header id="portfolio">
+        <a href="#"><img src="/access/www.w3schools.com/w3images/avatar_g2.jpg" style="width:65px;"
+                         class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+        <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i
+                class="fa fa-bars"></i></span>
+        <div class="w3-container w3-padding-48">
+            <div class="w3-row">
+                <div class="w3-left">
+                    <h1 style="font-size: 60px"><b>My Post course</b></h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Pagination -->
+    <div class="w3-center w3-padding-32">
+        <div class="w3-container w3-white">
+            <div class="w3-row" style="margin:0 -32px">
+                <div class="w3-col m6 l4" th:each="post:${posts}">
+                    <div class="w3-card-4 w3-margin">
+                        <header class="w3-container w3-light-grey">
+                            <h3 th:text="${post.user.name}"></h3>
+                        </header>
+                        <div class="w3-container">
+                            <p style="height:50px;overflow: hidden;line-height: 25px" th:text="${post.title}"></p>
+                            <hr>
+                            <p th:text="${post.createdDate}"></p>
+                        </div>
+                        <a th:href="@{'/post/detail/'+${post.id}}" style="text-decoration: none">
+                            <button class="w3-button w3-block w3-dark-grey">View</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w3-bar" th:if="${totalPages>1}">
+            <a th:if="${currentPage!=1}"
+               th:href="@{'/course/'+${courseId}+'/post?page='+${currentPage-1}+${(!key.isBlank())?'&key='+key:''}}"
+               class="w3-bar-item w3-button w3-hover-black">«</a>
+            <span th:each="i:${#numbers.sequence(1,totalPages)}">
+                <th:block th:if="${i<2||i>totalPages-1||i==currentPage||i==(currentPage+1)||i==(currentPage-1)}">
+                     <a th:if="${currentPage!=i}"
+                        th:href="@{'/course/'+${courseId}+'/post?page='+${i}+${(!key.isBlank())?'&key='+key:''}}"
+                        class="w3-bar-item w3-button">[[${i}]]</a>
+                <span th:unless="${currentPage!=i}" class="w3-bar-item w3-black w3-button">[[${i}]]</span>
+                </th:block>
+                <th:block th:unless="${i<2||i>totalPages-1||i==currentPage||i==(currentPage+1)||i==(currentPage-1)}">
+                    <span th:if="${((i==2)&&(currentPage>1))||((i==(totalPages-1))&&(currentPage<totalPages))}"
+                          class="w3-bar-item w3-button">...</span>
+                </th:block>
+            </span>
+            <a href="#" th:if="${currentPage < totalPages}"
+               th:href="@{'/course/'+${courseId}+'/post?page='+${currentPage+1}+${(!key.isBlank())?'&key='+key:''}}"
+               class="w3-bar-item w3-button w3-hover-black">»</a>
+        </div>
+    </div>
+
+
+    <span th:replace="~{/fragments/footer_user :: span}"></span>
+</div>
+
+<!--    Form post-->
+</body>
+<script src="/access/home.js"></script>
+<script th:replace="~{/fragments/js_index :: script}"></script>
+<!-- Mirrored from www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_portfolio&stacked=h by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jun 2022 03:41:24 GMT -->
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Learning Code Everyday</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" th:href="@{/access/Desing-1-32.png}">
+    <link rel="stylesheet" href="/access/www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="/access/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/access/home.css">
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: "Raleway", sans-serif
+        }
+    </style>
+</head>
+<body class="w3-light-grey w3-content" style="max-width:100%;">
+
+<!-- Sidebar/menu -->
+<nav th:replace="~{/fragments/nav_user ::nav}"></nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+     title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;">
+    <!--    Option -->
+    <div th:replace="~{/fragments/profile_user :: div}"></div>
+    <!--    Notice-->
+    <span th:replace="~{/fragments/notice :: span}"></span>
+    <!-- Header -->
+    <header id="portfolio">
+        <a href="#"><img src="/access/www.w3schools.com/w3images/avatar_g2.jpg" style="width:65px;"
+                         class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+        <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i
+                class="fa fa-bars"></i></span>
+        <div class="w3-container w3-padding-48">
+            <div class="w3-row">
+                <div class="w3-left">
+                    <h1 style="font-size: 60px"><b>Lessons</b></h1>
+                </div>
+            </div>
+            <div class="w3-row">
+                <form th:action="@{/search}" id="form-search" method="get" class="form-search">
+                    <input type="text" id="mySearch" name="search" placeholder="Search.." title="Type in a category">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+                <select class="sort_ajax" id="sort_post" name="sort">
+                    <option value="id_ASC">New</option>
+                    <option value="id_DESC">Oldest</option>
+                    <option value="title_ASC">A-Z</option>
+                    <option value="title_DESC">Z-A</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!--    First Photo Grid-->
+    <div class="w3-row-padding" id="view_post">
+        <div class="w3-third w3-container w3-margin-bottom" th:each="p : ${postList}">
+            <img src="/access/www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%"
+                 class="w3-hover-opacity">
+            <div class="w3-container w3-white">
+                <p><b th:text="${p.title}" style="text-overflow: ellipsis"></b><i class="w3-right"
+                                                                                  th:text="${#dates.format(p.createdDate, 'dd/MM/yyyy')}"></i>
+                </p>
+                <hr>
+                <p>Tác giả : <span th:text="${p.user.name}"></span></p>
+                <p>Khóa học : <span th:text="${p.course.name}"></span></p>
+                <p>Môn học : <span th:text="${p.course.subject.name}"></span></p>
+                <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><a
+                        th:href="@{/post/detail/{id}(id = ${p.id})}"><i class="fa fa-list-alt"></i>  Detail</a></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="w3-center w3-padding-32">
+        <div class="w3-bar">
+            <a class="w3-bar-item w3-button w3-hover-black">«</a>
+            <a class="w3-bar-item w3-button w3-black">1</a>
+            <a class="w3-bar-item w3-button w3-hover-black">2</a>
+            <a class="w3-bar-item w3-button w3-hover-black">3</a>
+            <a class="w3-bar-item w3-button w3-hover-black">»</a>
+        </div>
+    </div>
+    <span th:replace="~{/fragments/footer_user :: span}"></span>
+</div>
+
+<!--Form post-->
+<div class="form-add-post">
+    <div class="align-items-center justify-content-center">
+        <form class="form-input" th:action="@{/post/store}" method="post">
+            <h2 class="w3-center">Post Create</h2>
+            <input hidden="hidden" name="user" th:value="${user.id}">
+
+            <label for="title">Title</label><br>
+            <input type="text" id="title" name="title" placeholder="Title....." required="true"><br><br>
+
+            <input hidden="hidden" name="createdDate" th:value="${#dates.format(#dates.createNow(), 'dd/MM/yyyy')}">
+
+            <label for="content">Content</label><br>
+            <textarea id="content" name="content" rows="5" placeholder="Content....."
+                      required="true"></textarea><br><br>
+
+            <label for="course_select">Course</label>
+            <select id="course_select" name="course">
+                <option th:each="course : ${courseList}" th:text="${course.name}" th:value="${course.id}"></option>
+            </select><br><br>
+            <button type="button" class="w3-button w3-red w3-left close-switch">Back</button>
+            <button type="submit" class="w3-button w3-green w3-right">Submit</button>
+        </form>
+    </div>
+</div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $('.switch').on('click', function () {
+        $('.form-add-post').fadeIn(400);
+    });
+
+    $('.close-switch').on('click', function () {
+        $('.form-add-post').fadeOut(400, function () {
+        });
+    });
+</script>
+<script th:src="@{/access/home.js}"></script>
+<script th:replace="~{/fragments/js_index :: script}"></script>
+</html>

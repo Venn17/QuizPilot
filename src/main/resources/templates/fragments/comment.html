@@ -1,0 +1,14 @@
+<span xmlns:th="http://www.thymeleaf.org">
+<div class="comment w3-white">
+  <span id="username" th:utext="${username}" hidden="hidden"></span>
+  <form id="messageForm">
+    <h3>Write a comment</h3>
+    <input hidden="hidden" name="userComment" th:value="${user.id}">
+    <input hidden="hidden" name="post" th:value="${post.id}">
+    <input hidden="hidden" name="createdDate" th:value="${#dates.format(#dates.createNow(), 'dd/MM/yyyy')}">
+    <input type="text" id="message" name="text" placeholder="Comment ...." required="required">
+    <button type="button" id="submit_comment" class="w3-btn"><i class="fa fa-paper-plane"
+                                                                aria-hidden="true"></i></button>
+  </form>
+</div>
+</span>

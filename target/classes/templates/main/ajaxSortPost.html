@@ -1,0 +1,11 @@
+<div class="w3-row-padding" id="view_post" xmlns="http://www.w3.org/1999/html">
+    <a th:href="@{/post/detail/{id}(id = ${p.id})}" ><div class="w3-third w3-container w3-margin-bottom" th:each="p : ${postList}">
+        <img src="/access/www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+        <div class="w3-container w3-white">
+            <p><b th:text="${p.title}"></b><i class="w3-right"
+                                              th:text="${#dates.format(p.createdDate, 'dd/MM/yyyy')}"></i></p>
+            <hr>
+            <p th:utext="${p.content}"></p>
+        </div>
+    </div></a>
+</div>

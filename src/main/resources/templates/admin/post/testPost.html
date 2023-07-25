@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<!-- Mirrored from www.w3schools.com/w3css/tryw3css_templates_analytics.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jun 2022 03:34:48 GMT -->
+<head>
+    <title>Quiz Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" th:href="@{/access/Desing-1-32.png}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" th:href="@{/access/www.w3schools.com/w3css/4/w3.css}">
+    <link rel="stylesheet"
+          th:href="@{/access/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/access/css/main.css}">
+    <style>
+        html, body, h1, h2, h3, h4, h5 {
+            font-family: "Raleway", sans-serif
+        }
+    </style>
+</head>
+<link rel="stylesheet"
+      th:href="@{/richtexteditor/rte_theme_default.css}"/>
+<script type="text/javascript" th:src="@{/richtexteditor/rte.js}"></script>
+<script type="text/javascript"
+        th:src='@{/richtexteditor/plugins/all_plugins.js}'></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<body th:with="active='post'">
+
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i
+            class="fa fa-bars"></i> &nbsp;Menu
+    </button>
+    <span class="w3-bar-item w3-right">Logo</span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+    <div class="w3-container w3-row">
+        <div class="w3-col s4">
+            <img src="/access/www.w3schools.com/w3images/avatar2.png" class="w3-circle w3-margin-right"
+                 style="width:46px">
+        </div>
+        <div class="w3-col s8 w3-bar">
+            <span sec:authorize="isAuthenticated()">Welcome, <strong sec:authentication="name"></strong></span><br>
+            <a th:href="@{/logout}" class="w3-bar-item w3-button"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout</a>
+        </div>
+    </div>
+
+    <span th:replace="~{fragments/sideBar :: span}"></span>
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+     title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+    <!-- Header -->
+    <header class="w3-container w3-padding-24 w3-margin-bottom" style="padding-top:22px">
+        <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
+    </header>
+
+    <div class="w3-container">
+        <h2>Post Management</h2>
+        <p>Dess</p>
+        <div class="w3-row">
+            <div class="w3-col">
+                <p>Horizontal:</p>
+                <div class="w3-bar w3-light-grey">
+                    <a th:href="@{/admin/posts}" class="w3-bar-item w3-button w3-green">List</a>
+                    <a th:href="@{/admin/posts/new}" class="w3-bar-item w3-button w3-hide-small">Add a New</a>
+                    <div class="w3-bar-item w3-button w3-right">
+                        <form class="w3-bar">
+                            <input type="text" placeholder="Search here.....">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <br class="w3-hide-small">
+            </div>
+        </div>
+        <table class="w3-table w3-hover-border-blue w3-hoverable w3-border">
+            <div class="w3-container w3-card w3-light-grey" style="width:80%;">
+                <p align="left">
+                    <label>Title:</label>
+                    <input class="w3-input w3-border" required autofocus type="text" name="title_rte" id="title_rte">
+                    <textarea id="div_editor1">
+                        <p>This is a default toolbar demo of Rich text editor.</p>
+                    </textarea>
+                </p>
+                <p>
+                    <input id="sub" class="w3-btn w3-block w3-green w3-m"
+                           type="submit" value="submit"/>
+                </p>
+            </div>
+        </table>
+    </div>
+    <div th:replace="~{fragments/footer :: div}"></div>
+</div>
+
+<script type="text/javascript" th:inline="javascript">
+    // richtext editor
+    let editor1 = new RichTextEditor("#div_editor1");
+    var formData = new FormData();
+    let container = new DataTransfer();
+
+    $("#sub").click(function () {
+        let val = $("#div_editor1").val();
+        let src, file, objectURL;
+        let awaitThis;
+        $(val).find("img").each(function (i) {
+            console.log("lap" + i);
+            src = $(this).attr("src");
+            console.log($(this).attr("src"));
+            awaitThis = fetch(src)
+                .then(res => res.blob()) // Gets the response and returns it as a blob
+                .then(blob => {
+                    objectURL = URL.createObjectURL(blob);
+                    console.log("file la");
+                    file = new File([blob], "img.png");
+                    formData.append("files", file, file.name)
+                    console.log(file);
+                });
+        })
+        awaitThis.then(function () {
+            console.log(formData.getAll("img_content"));
+            var content = editor1.getHTMLCode();
+            var title = $("#title_rte").val();
+            formData.append("title", title);
+            formData.append("content", content);
+            // console.log("fd la")
+            $.ajax({
+                url: 'http://localhost:8080/admin/posts/new',
+                type: 'POST',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+            location.reload();
+            return true;
+        })
+    });
+</script>
+</body>
+
+<!-- Mirrored from www.w3schools.com/w3css/tryw3css_templates_analytics.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jun 2022 03:34:50 GMT -->
+</html>

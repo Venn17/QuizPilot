@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Spring Quiz - registration</title>
+</head>
+<body>
+
+<div class="w3-panel" align="center">
+    <h1 align="center" class="w3-padding-32">Register new account </h1>
+    <form class="w3-container w3-card  w3-light-grey" style="width:50%;"
+          action="#" th:action="@{/admin/user/registration}" th:object="${user}" method="post">
+
+
+        <p align="left">
+            <label th:for="username">Username: *</label>
+            <input class="w3-input w3-border"
+                   th:field="${user.name}" required/>
+            <label class="w3-text-red"
+                   th:errors="*{name}"> </label>
+            <label class="w3-text-red"
+                   th:text="${message}"> </label>
+        </p>
+        <p align="left">
+        <label th:for="email">Email: *</label>
+            <input class="w3-input w3-border"
+                   type="email" th:field="${user.email}" required/>
+            <label class="w3-text-red"
+                   th:text="${emailerror}"> </label>
+        </p>
+
+        <p align="left">
+            <label th:for="password">Password: *</label>
+            <input class="w3-input w3-border"
+                   type="password" th:field="${user.password}" required/>
+        <div th:if="${error}">
+            <p class="w3-center text-danger w3-text-red">[[${error}]]</p>
+        </div>
+        <p align="left">
+
+            <label>Account type:</label>
+
+            <select class="w3-select w3-border" th:field="${user.role}" required>
+                <option value=""> -- choose role --</option>
+                <option th:each="r : ${T(src.quiz.entity.Role).values()}"
+                        class="w3-border-white w3-hover-border-green"
+                        th:value="${r}" th:text="${r.displayValue}">
+
+                </option>
+            </select>
+        </p>
+        <div style="display:  inline-flex;">
+            <p class="w3-margin-left">
+                <input class="w3-btn w3-block w3-red w3-m"
+                       type="submit" value="Cancel"/>
+
+            </p>
+            <p class="w3-margin-left">
+                <input class="w3-btn w3-block w3-green w3-m"
+                       type="submit" value="Register"/>
+
+            </p>
+
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>

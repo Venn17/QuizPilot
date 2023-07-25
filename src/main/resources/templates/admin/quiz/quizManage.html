@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<span th:replace="~{fragments/sideBar :: span}"></span>
+<h2>Quiz Management</h2>
+<span th:insert="~{fragments/test_nav :: span}"></span>
+<table class="w3-table w3-hover-border-blue w3-hoverable w3-border">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Points</th>
+    </tr>
+    <tr>
+        <td>Jill</td>
+        <td>Smith</td>
+        <td>50</td>
+    </tr>
+    <tr>
+        <td>Eve</td>
+        <td>Jackson</td>
+        <td>94</td>
+    </tr>
+    <tr>
+        <td>Adam</td>
+        <td>Johnson</td>
+        <td>67</td>
+    </tr>
+</table>
+<p> <a  th:href="@{/admin/registration}">dang ky</a></p>
+<a th:href="@{/logoutUser}">logout</a>
+</div>
+<div th:replace="~{fragments/footer :: div}"></div>
+</div>
+
+</body>
+
+<!-- Mirrored from www.w3schools.com/w3css/tryw3css_templates_analytics.htm by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jun 2022 03:34:50 GMT -->
+</html>

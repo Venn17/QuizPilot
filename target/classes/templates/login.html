@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <title>Title</title>
+  <link rel="icon" type="image/x-icon" th:href="@{/access/Desing-1-32.png}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/access/home.css">
+</head>
+<body>
+<div class="w3-container" style="margin-top: 150px;">
+
+
+  <div id="id01" class="">
+      <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+          <div class="w3-center"><br>
+
+              <img src="data:image/jpeg;base64,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"
+                   alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+          </div>
+          <div th:if="${message}">
+              <p class="text-warning w3-text-green w3-center">[[${message}]]</p>
+          </div>
+          <label style="margin: 23%;" class="w3-text-red"
+                 th:text="${error}"> </label>
+
+          <form class="w3-container" th:action="@{/signin}" method="post">
+              <div class="w3-section">
+
+                  <input class="w3-input w3-border   w3-margin-bottom" type="text" placeholder="Enter Username"
+                         name="name"
+                         required>
+
+                  <input class="w3-input w3-border  " name="password" placeholder="Enter Password" type="password"
+                         required>
+                  <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
+
+
+        </div>
+      </form>
+      <div style="display: flex" class="w3-container w3-margin-bottom">
+        <button class="w3-button w3-block w3-blue w3-margin-right"><a style="text-decoration: none"
+                                                                      th:href="@{/oauth2/authorization/facebook}"
+                                                                      class="fa fa-facebook">&nbsp Facebook</a></button>
+        <button class="w3-button w3-block w3-red "><a style="text-decoration: none"
+                                                      th:href="@{/oauth2/authorization/google}" class="fa fa-google">&nbsp
+          Google</a></button>
+      </div>
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <span class="w3-right w3-padding w3-hide-small"> <a th:href="@{/registration}">Register an account</a></span>
+        <span class="w3-left w3-padding w3-hide-small">Forgot <a th:href="@{/forgot_password}">password?</a></span>
+      </div>
+
+      </div>
+  </div>
+</div>
+
+</body>
+</html>
